@@ -17,13 +17,12 @@ public class CarServiceImpl implements CarService {
 	 private CarDb carDb;
 	 
 	 @Override
-	 public void addCar(CarModel car) {
-		 carDb.save(car);
-	 }	
+	 public CarModel addCar(CarModel car) {
+			return carDb.save(car);
+			}
 
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
 		carDb.deleteById(id);
 	}
 	
@@ -43,8 +42,22 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public void deleteCar(CarModel car) {
-		// TODO Auto-generated method stub
 		carDb.delete(car);
 	}
-}
+
+	@Override
+	public List<CarModel> getListCardOrderByPriveAsc(Long dealerId) {
+		return carDb.findByDealerIdOrderByPriceAsc(dealerId);
+	}
 	
+    @Override
+    public List<CarModel> getAllCar() {
+        return carDb.findAll();
+    }
+    
+    @Override
+    public Optional<CarModel> getCarDetailById(Long id) {
+        return carDb.findById(id);
+    }
+
+}

@@ -1,13 +1,18 @@
 package com.apap.tutorial7.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.apap.tutorial7.model.CarModel;
 
 public interface CarService {
-	void addCar(CarModel car);
-	public void deleteById(Long id);
+	CarModel addCar(CarModel car);
 	void updateCar(long id,CarModel car);
-	CarModel getCar(Long id);
 	void deleteCar(CarModel car);
+	CarModel getCar(Long id);
+	List<CarModel> getListCardOrderByPriveAsc(Long dealerId);
+	List<CarModel> getAllCar();
+	Optional<CarModel> getCarDetailById(Long id);
+	
+	public void deleteById(Long id);
 }

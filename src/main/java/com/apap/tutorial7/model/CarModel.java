@@ -1,11 +1,19 @@
 package com.apap.tutorial7.model;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -28,16 +36,16 @@ public class CarModel implements Serializable{
 	
 	@NotNull
 	@Column(name = "price", nullable = false)
-	private String price;
+	private long price;
 	
 	@NotNull
 	@Column(name = "amount", nullable = false)
-	private String amount;
+	private Integer amount;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="dealer_id", referencedColumnName="id", nullable= false)
 	@OnDelete(action=OnDeleteAction.NO_ACTION)
-	@JsonIgnore
+	//@JsonIgnore
 	private DealerModel dealer;
 
 	public long getId() {
@@ -64,19 +72,18 @@ public class CarModel implements Serializable{
 		this.type = type;
 	}
 
-	public String getPrice() {
+	public long getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
-
-	public String getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
@@ -87,6 +94,7 @@ public class CarModel implements Serializable{
 	public void setDealer(DealerModel dealer) {
 		this.dealer = dealer;
 	}
+
 	
 	
 }
